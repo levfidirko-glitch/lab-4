@@ -10,137 +10,83 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Laboratory Work 4',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const FirstScreen(),
+      title: 'Lab 4 New',
+      theme: ThemeData(primarySwatch: Colors.blueGrey),
+      home: const HomePage(),
     );
   }
 }
 
-class FirstScreen extends StatefulWidget {
-  const FirstScreen({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<FirstScreen> createState() => _FirstScreenState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _FirstScreenState extends State<FirstScreen> {
-  bool _toggle = true; 
-  BoxFit fitMode = BoxFit.cover; 
+class _HomePageState extends State<HomePage> {
+  bool change = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Laboratory Work 4")),
+      appBar: AppBar(title: const Text("Lab 4 New")),
       body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              
-              SizedBox(
-                width: 300,
-                height: 200,
-                child: Image.asset(
-                  _toggle ? "assets/image1.jpg" : "assets/image2.jpg",
-                  fit: fitMode,
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset("assets/image1.jpg",
-                      width: 300, height: 200, fit: BoxFit.cover),
-                  Container(
-                    width: 300,
-                    height: 200,
-                    color: Colors.black.withOpacity(0.5),
-                  ),
-                  const Text(
-                    "Welcome to Flutter",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
-
-              
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  minimumSize: const Size(200, 50),
-                ),
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("SnackBar is shown!")),
-                  );
-                },
-                child: const Text(
-                  "Show SnackBar",
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
-              ),
-              const SizedBox(height: 15),
-
-              
-              TextButton(
-                style: TextButton.styleFrom(
-                  minimumSize: const Size(200, 50),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SecondScreen()),
-                  );
-                },
-                child: const Text(
-                  "Go to Second Screen",
-                  style: TextStyle(fontSize: 16, color: Colors.green),
-                ),
-              ),
-              const SizedBox(height: 15),
-
-              
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Colors.black),
-                  minimumSize: const Size(200, 50),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _toggle = !_toggle;
-                  });
-                },
-                child: const Text(
-                  "Toggle Image",
-                  style: TextStyle(fontSize: 16, color: Colors.black),
-                ),
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              change ? "assets/image1.jpg" : "assets/image2.jpg",
+              width: 250,
+              height: 180,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("SnackBar here")),
+                );
+              },
+              child: const Text("Show SnackBar"),
+            ),
+            const SizedBox(height: 15),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const SecondPage()),
+                );
+              },
+              child: const Text("Next Page"),
+            ),
+            const SizedBox(height: 15),
+            OutlinedButton(
+              onPressed: () {
+                setState(() {
+                  change = !change;
+                });
+              },
+              child: const Text("Toggle Image"),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({super.key});
+class SecondPage extends StatelessWidget {
+  const SecondPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Second Screen")),
+      appBar: AppBar(title: const Text("Second Page")),
       body: const Center(
         child: Text(
-          "You are on the second screen!",
-          style: TextStyle(fontSize: 20, color: Colors.blue),
+          "Second Page is opened",
+          style: TextStyle(fontSize: 20, color: Colors.blueGrey),
         ),
       ),
     );
